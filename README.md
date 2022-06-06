@@ -79,15 +79,3 @@ $  pip3 install tabulate
 $  pip3 install openpyxl
 ```
 <br />
-
-9 - keras: <br /> 
-```diff
-$  pip3 install keras
-```
-<br />
-
-10 - tensorflow: <br /> 
-```diff
-$  pip3 install tensorflow
-```
-<br />
