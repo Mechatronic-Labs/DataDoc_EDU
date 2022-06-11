@@ -10,8 +10,15 @@ There is also an open source edition for DataDoc used for educational purposes i
  integration with bigdata and seamless deployment into applications. Its ease of use, flexibility and scalability make Datadoc accessible,<br>
  to users with all skill levels and outfits projects of all sizes and complexity to help you and your organization find new opportunities, improve efficiency and minimize risk.<br>
 
+# Instalation for User
+In order to Install the project you have to follow the bellow steps:<br />
+1 - From Tab DataDoc_EDU V.1.0 Download DataDoc_Installation file. <br />
+2 - Install Python Version (is inside to folder). <br />
+3 - Run modules_installation_for_DataDoc.bat file. <br />
+4 - Restart your system. <br />
+4 - From DataDoc_EDU folder run DataDoc.py file. <br /> 
 
-# Instalation
+# Instalation for Developers
 In order to run the project you have to install first the following modules:<br />
 1 - Python compiler: <br /> 
 Python is installed in every linux distributions
