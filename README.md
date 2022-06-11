@@ -16,7 +16,7 @@ In order to Install the project you have to follow the bellow steps:<br />
 2 - Install Python Version (is inside to folder). <br />
 3 - Run modules_installation_for_DataDoc.bat file. <br />
 4 - Restart your system. <br />
-4 - From DataDoc_EDU folder run DataDoc.py file. <br /> 
+5 - From DataDoc_EDU folder run DataDoc.py file. <br /> 
 
 # Instalation for Developers
 In order to run the project you have to install first the following modules:<br />
