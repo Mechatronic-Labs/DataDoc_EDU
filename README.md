@@ -86,3 +86,15 @@ $  pip3 install tabulate
 $  pip3 install openpyxl
 ```
 <br />
+
+9 - sympy: <br /> 
+```diff
+$  pip3 install sympy
+```
+<br />
+
+10 - statsmodels: <br /> 
+```diff
+$  pip3 install statsmodels
+```
+<br />
