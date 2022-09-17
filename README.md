@@ -1,5 +1,5 @@
 # DataDoc EDU
-Datadoc_EDU aim is, to arouse highschool and university students interest in computer science as well as data analysis, via real problem datasets and Python's power.
+This Educational version of Datadoc aim to arouse highschool and university students interest in computer science as well as data analysis, via real problem datasets and Python's power.
 # AIM
 The project aims to make Data Science approachable to everyone without the need of the excess knowledge on mathematics and statistics. <br>
 DataDoc can also be used by researchers and proffesionals who want to automate their jobs and get rid of uselessly repeated code. <br>
