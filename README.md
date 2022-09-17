@@ -1,5 +1,4 @@
 # DataDoc EDU
-sth to delete
 This Educational version of Datadoc aim to arouse highschool and university students interest in computer science as well as data analysis, via real problem datasets and Python's power.
 # AIM
 The project aims to make Data Science approachable to everyone without the need of the excess knowledge on mathematics and statistics. <br>
