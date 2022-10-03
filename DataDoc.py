@@ -12,7 +12,6 @@ __status__      = "Production"
 
 # Importing Libraries
 from tkinter import *
-import tkinter
 from tkinter import ttk
 from PIL import ImageTk
 from tkinter import messagebox as tkMessageBox
@@ -53,7 +52,9 @@ from Parametric_Tests import Paired_t_test as ptt
 from Non_Parametric_Tests import Wilcoxon as wlcx
 from Non_Parametric_Tests import Mann_Whitney_Wilcoxon as MWwlcx
 from Non_Parametric_Tests import Chisqueare as chi2
-from Non_Parametric_Tests import One_Sample_Kolmogorov_Smirnov as OSKS
+
+# The following module is under construction 
+# from Non_Parametric_Tests import One_Sample_Kolmogorov_Smirnov as OSKS
 
 
 # Visualization Imports
@@ -79,7 +80,6 @@ from Data_Mining_Models import Naive_Bayes as NBY
 from General import about
 from General import key_list
 
-import matplotlib.image as mpimg
 from General import splash 
 
 
@@ -223,9 +223,9 @@ class DataDoc:
         #Non parametric Tests
         #========================================================================================
         #Define images for Non parametric Tests
-        self.nparam        = PhotoImage(file = "icons/dstats.png")
-        self.paired_wl     = PhotoImage(file = "icons/p_wil.png")
-        self.indepe_wl     = PhotoImage(file = "icons/p_inwil.png")
+        self.nparam     = PhotoImage(file = "icons/dstats.png")
+        self.paired_wl  = PhotoImage(file = "icons/p_wil.png")
+        self.indepe_wl  = PhotoImage(file = "icons/p_inwil.png")
 
 
         self.submenu2.add_cascade(label="Non Parametric Tests", image = self.nparam, menu = self.filemenu)
