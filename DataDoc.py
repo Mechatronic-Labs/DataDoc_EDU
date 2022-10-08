@@ -4,9 +4,9 @@
 __author__      = "Apostolos Tapsas", "Apostolos Valiakos"
 __copyright__   = "Copyright 2019, Apostolos Tapsas", "Apostolos Valiakos"
 __license__     = "Heartbit"
-__version__     = "1.0.5"
+__version__     = "1.0.6"
 __email__       = "Apostolos Tapsas", "Apostolos Valiakos"
-__status__      = "Production"
+__status__      = "Production/Under Development"
 
 # 7113 lines of code and so on 
 
