@@ -346,21 +346,8 @@ class DataDoc:
         # Sub menus of 3rd menu of Preprocces tab
         self.kmeans_menu.add_command(label = "Hierarchical clustering", image = self.hierart_img, command = self.hc)
         self.kmeans_menu.add_command(label = "K-Means",                 image = self.kmeans_img,  command = self.km)
-        
 
-        # Settings Menu
-        #==========================================================================================
-        self.settings_menu = Menu(self.menu)
-        self.menu.add_cascade(label = "Settings", menu = self.settings_menu)
-        
-       
-        # Themes Menu
-        #==========================================================================================
-        ##self.themes_menu = Menu(self.menu)
-        ##self.settings_menu.add_cascade(label = "Themes", menu = self.themes_menu)
-        ##self.themes_menu.add_command  (label = "Basic",  command = '')
-    
-       
+
         # Help Menu
         #==========================================================================================
         self.about_menu = Menu(self.menu)
@@ -377,10 +364,8 @@ class DataDoc:
         # Import and Stats for Dataset Tab Buttons
         #==========================================================================================
         self.import_data_img = PhotoImage(file = "icons/imdb.png")
-        ##self.scp  = PhotoImage(file = "icons/scaplot.png")
-        ##self.abt  = PhotoImage(file = "icons/sti2.png")
         self.data_stats_img  = PhotoImage(file = "icons/p_ds.png")
-        self.data_view_img  = PhotoImage(file = "icons/p_view.png")        
+        self.data_view_img   = PhotoImage(file = "icons/p_view.png")        
         
         # To work with createToolTip class you should create the buttons as below
         self.import_data_button1 = ttk.Button(self.data_tab, text = 'Import Dataset', image = self.import_data_img, command = self.import_dataset)
@@ -471,16 +456,6 @@ class DataDoc:
         self.fp_tip = tlm.createToolTip(self.fp_btn, '!fp')
         
 
-        text = Text(self.tab6)
-        text.grid(row = 0, column = 0)
-        self.hyperlink = thlm.HyperlinkManager(text)
-        text.insert(INSERT, "The Heartbit",self.hyperlink.add(self.about_us))
-        text.insert(INSERT, " Datadoc software platform offers advanced statistical analysis, a vast library of machine-learning algorithms, image procesing")
-        text.insert(INSERT, " integration with bigdata and seamless deployment into applications. Its ease of use, flexibility and scalability make Datadoc accessible,")
-        text.insert(INSERT, " to users with all skill levels and outfits projects of all sizes and complexity to help you and your organization find new opportunities, improve efficiency and minimize risk.")
-        text.configure(state='disabled')
-
-
         # Create Keysortcuts
         self.app.bind('<i>', self.import_dataset)
         self.app.bind('<k>', self.kprica)
@@ -525,67 +500,6 @@ class DataDoc:
     
     def key_list(self):
         print (key_list.keys_list())
-
-    def about_us(self):
-        webbrowser.open('https://heartbit.gr')
-    
-    def basic_theme(self,event=None):
-
-        self.sel_theme = 'basic'                                              
-        self.style.configure('new.TFrame', background='white')
-        self.style.configure('lefttab.TNotebook', tabposition='wn', background='#5c94c5')
-
-        # change tab images
-        self.home_image = PhotoImage(file = "icons/home.png")
-        
-        self.note.tab(self.tab1,image=self.home_image)
-        #self.note.tab(self.tab1,image='')
-
-        self.vis_image = PhotoImage(file = "icons/p_vis.png")
-        self.note.tab(self.tab5,image=self.vis_image)
-        #self.note.tab(self.tab5,image='')
-
-        # first tab button update
-        self.imdb = PhotoImage(file = "icons/imdb.png")
-        self.import_data_button1.configure(image=self.imdb)
-
-        self.shd  = PhotoImage(file = "icons/p_ds.png")
-        self.import_data_button2.configure(image=self.shd)
-
-        self.vie  = PhotoImage(file = "icons/p_view.png")
-        self.import_data_button3.configure(image=self.vie)
-
-        self.svi  = PhotoImage(file = "icons/saved.png")
-        self.import_data_button4.configure(image=self.svi)
-
-
-        # second tab button update
-        self.hist_pic = PhotoImage(file = "icons/p_hist.png")
-        self.hist_btn.configure(image=self.hist_pic)
-
-        
-        self.box_pic = PhotoImage(file = "icons/p_box_btn.png")
-        self.box_btn.configure(image=self.box_pic)
-
-        self.pie_pic = PhotoImage(file = "icons/p_pie.png")
-        self.pie_btn.configure(image=self.pie_pic)
-
-        self.sc_pic = PhotoImage(file = "icons/scaplot.png")
-        self.sc_btn.configure(image=self.sc_pic)
-
-        self.line_pic = PhotoImage(file = "icons/p_line_graph.png")
-        self.line_btn.configure(image=self.line_pic)
-
-        self.bar_pic = PhotoImage(file = "icons/p_bar.png")
-        self.bar_btn.configure(image=self.bar_pic )
-
-
-        # Bug image
-        self.bug_image = PhotoImage(file = "icons/p_bug.png")
-        self.bug_image.configure(image = self.bug_image)
-
-        self.packages_image = PhotoImage(file = "icons/install.png")
-        self.exe.configure(image = self.packages_image)
     
     def show_app(self,event=None):
         tkMessageBox.showinfo("Info","This Module is Under Construction")
@@ -624,60 +538,49 @@ class DataDoc:
     def data_stats(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             ds.Data_Statistics(self.Dataset)
 
     def plot_data(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             SP.Scatter_Plot(self.Dataset)
 
     def del_miss_vals(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             self.Dataset = pr.Preprocessing().del_missing_vals(self.Dataset)
 
     def rep_means(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             self.Dataset = pr.Preprocessing().rep_miss_vals_with_mean_val(self.Dataset)
             tkMessageBox.showinfo("Info","Missing Values Are Replaced With Mean Values")
 
-    def docs(self):
-        webbrowser.open("https://heartbit.gr/datadoc-documentation/")
-
     def norm_test(self,event=None):
          if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
          else:
              an.Analyze(self.Dataset)
 
     def ftest(self,event=None):
          if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
          else:
              ft.f_test(self.Dataset)
 
     def chi(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
              chi2.chisquare2(self.Dataset)
 
     def in_t_test(self):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             itt.t_test(self.Dataset)
 
@@ -685,7 +588,6 @@ class DataDoc:
     def in_z_test(self):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             izt.z_test(self.Dataset)
 
@@ -693,7 +595,6 @@ class DataDoc:
     def p_t_test(self):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             ptt.t_test(self.Dataset)
 
@@ -701,7 +602,6 @@ class DataDoc:
     def Wilcox(self):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             wlcx.Wilcoxon_Test(self.Dataset)
 
@@ -709,31 +609,26 @@ class DataDoc:
     def Mann_Whitney_Wilcoxon(self):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             MWwlcx.Mann_Whitney_Wilcoxon(self.Dataset)
 
 
-    
     # Data Visualization    
     def pie_chart(self,event=None):
          if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
          else:
              PCH.Pie_Chart(self.Dataset)
 
     def line_graph(self,event=None):
          if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
          else:
              LN.Line_Graph(self.Dataset)
 
     def box_graph(self,event=None):
          if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
          else:
              BP.Box_Plot(self.Dataset,self.sel_theme)
 
@@ -741,7 +636,6 @@ class DataDoc:
     def hist_graph(self,event=None):
          if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
          else:
              HS.Histogram(self.Dataset)
 
@@ -749,14 +643,12 @@ class DataDoc:
     def prica(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             pca.pca(self.Dataset)
             
     def kprica(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             kpca.Kernel_PCA(self.Dataset)
 
@@ -765,48 +657,41 @@ class DataDoc:
     def slr(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             SLR.Simple_Linear_Regrassion(self.Dataset,'r')
 
     def mlr(self,event=None):
          if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
          else:
              MLR.Multiple_Linear_Regrassion(self.Dataset,'r')
 
     def svr(self,event=None):
          if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
          else:
              SVM.Support_Vectors(self.Dataset,'r')
     def dt_r(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             DT.Decision_trees(self.Dataset,'r') 
 
     def rf_r(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             RF.Random_Forest(self.Dataset,'r')
 
     def km(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             KM.K_Means(self.Dataset)
 
     def hc(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             HC.Hierarchical_clustering(self.Dataset)
 
@@ -815,21 +700,18 @@ class DataDoc:
     def logreg(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             LR.Logistic_Regrassion(self.Dataset)
 
     def dt_c(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             DT.Decision_trees(self.Dataset,'c')
 
     def rf_c(self,event=None):
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
-
         else:
             RF.Random_Forest(self.Dataset,'c')
 
