@@ -478,8 +478,7 @@ class DataDoc:
         text.configure(state='disabled')
 
 
-
-        # Create Kcleeysortcuts
+        # Create Keysortcuts
         self.app.bind('<i>', self.import_dataset)
         self.app.bind('<k>', self.kprica)
         self.app.bind('<p>', self.prica)
@@ -742,12 +741,7 @@ class DataDoc:
 
          else:
              HS.Histogram(self.Dataset)
-
-
-    def in_sklearn(self):
-        os.system("pip install -U scikit-learn")
-        tkMessageBox.showinfo("Install","Scikit Learn Installed Successfully.")
-
+             
     #PCA
     def prica(self,event=None):
         if len(self.Dataset)==0:
