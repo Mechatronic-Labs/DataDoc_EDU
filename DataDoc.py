@@ -17,8 +17,6 @@ from PIL import ImageTk
 from tkinter import messagebox as tkMessageBox
 from tkinter.colorchooser import askcolor
 import webbrowser
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
 from General import tkHyperlinkManager as thlm
