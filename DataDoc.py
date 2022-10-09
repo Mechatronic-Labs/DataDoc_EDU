@@ -99,10 +99,9 @@ class DataDoc:
 
         # Create application Gui
         self.app = Tk(className = 'DataDoc')
-        self.app.title("DataDoc 1.0")
+        self.app.title("DataDoc_EDU 1.0")
         self.app.geometry("940x540")
-        #self.app.attributes('-fullscreen', True)
-        #self.app.resizable(0,0)
+
         icon_img = PhotoImage(file='icons/logo.PNG')
         self.app.tk.call('wm', 'iconphoto', self.app._w, icon_img)
         self.bg_color  = 'white'
@@ -117,11 +116,11 @@ class DataDoc:
         self.note = ttk.Notebook(self.app, style='lefttab.TNotebook')
 
         # Create the two buttons will fit in the right site
-        self.tab1 = ttk.Frame(self.note, style='new.TFrame')
+        self.data_tab              = ttk.Frame(self.note, style='new.TFrame')
+        self.graphs_tab            = ttk.Frame(self.note, style='new.TFrame')
+        self.association_rules_tab = ttk.Frame(self.note, style='new.TFrame')
+        self.Neural_nets_tab       = ttk.Frame(self.note, style='new.TFrame')
         self.tab5 = ttk.Frame(self.note, style='new.TFrame')
-        self.tab4 = ttk.Frame(self.note, style='new.TFrame')
-        self.tab2 = ttk.Frame(self.note, style='new.TFrame')
-        self.tab3 = ttk.Frame(self.note, style='new.TFrame')
         self.tab6 = ttk.Frame(self.note, style='new.TFrame')
         
         # Put them images (tabs images)
@@ -135,10 +134,10 @@ class DataDoc:
         self.term_image       = PhotoImage(file = "icons/install.png")
        
         # Pack them also tabs view order
-        self.note.add(self.tab1, text = "Data",   image = self.home_image)
-        self.note.add(self.tab5, text = "View",   image = self.ter_image)
-        self.note.add(self.tab4, text = "Neural", image = self.nntab_image)
-        self.note.add(self.tab2, text = "Rules" , image = self.ass_image)
+        self.note.add(self.data_tab,              text = "Data",   image = self.home_image)
+        self.note.add(self.graphs_tab,            text = "View",   image = self.ter_image)
+        self.note.add(self.Neural_nets_tab,       text = "Neural", image = self.nntab_image)
+        self.note.add(self.association_rules_tab, text = "Rules" , image = self.ass_image)
         #self.note.add(self.tab3, text = "I", image = self.image_pros_image)
         #self.note.add(self.tab6, text = "About DataDoc", image = self.info_image)
         self.note.pack(fill=BOTH, expand=True, side='right')
@@ -372,7 +371,7 @@ class DataDoc:
         self.info_menu.add_command (label = 'About Datadoc',            command = self.abt)
         
 
-        # First Tab Buttons
+        # Import and Stats for Dataset Tab Buttons
         #==========================================================================================
         self.imdb = PhotoImage(file = "icons/imdb.png")
         self.scp  = PhotoImage(file = "icons/scaplot.png")
@@ -381,56 +380,19 @@ class DataDoc:
         self.vie  = PhotoImage(file = "icons/p_view.png")        
         
         # To work with createToolTip class you should create the buttons as below
-        self.import_data_button1 = ttk.Button(self.tab1, text = 'S', image = self.imdb, command = self.import_dataset)
+        self.import_data_button1 = ttk.Button(self.data_tab, text = 'S', image = self.imdb, command = self.import_dataset)
         self.import_data_button1.grid(row = 1, column = 0)
         self.sk_tip = tlm.createToolTip(self.import_data_button1, 'Import a dataset from .xlsx or .xls files.')
 
-        self.import_data_button2 = ttk.Button(self.tab1, text = 'S', image = self.shd , command = self.data_stats)
+        self.import_data_button2 = ttk.Button(self.data_tab, text = 'S', image = self.shd , command = self.data_stats)
         self.import_data_button2.grid(row = 1, column = 1)
         self.sk_tip = tlm.createToolTip(self.import_data_button2, 'Show Data Statistics')
 
 
-        self.import_data_button3 = ttk.Button(self.tab1, text = 'S', image = self.vie, command = self.view)
+        self.import_data_button3 = ttk.Button(self.data_tab, text = 'S', image = self.vie, command = self.view)
         self.import_data_button3.grid(row = 1, column = 2)
         self.skl2 = tlm.createToolTip(self.import_data_button3, "View dataset.")
-        
-        # Neural nets  Tab Buttons
-        #==========================================================================================        
-        self.NLP_ico = PhotoImage(file = "icons/p_NN.png")
-        self.CNN_ico = PhotoImage(file = "icons/p_NN1.png")
-        self.MLP_ico = PhotoImage(file = "icons/p_NN2.png")
 
-        self.nn_btn   = ttk.Button(self.tab4, text = 'S', image = self.MLP_ico, command = self.show_app)
-        self.nn_btn.grid(row = 1,column = 0)
-        self.nn_tip = tlm.createToolTip(self.nn_btn, "Build Neural Net")
-
-        self.cnn_btn   = ttk.Button(self.tab4, text = 'S', image = self.CNN_ico, command = self.show_app)
-        self.cnn_btn.grid(row = 1,column = 1)
-        self.cnn_tip = tlm.createToolTip(self.cnn_btn, "Build a Convolutional Neural Network")
-        
-        self.nlp_btn   = ttk.Button(self.tab4, text = 'S', image = self.NLP_ico, command = self.show_app)
-        self.nlp_btn.grid(row=2,column=0)
-        self.nlp_tip = tlm.createToolTip(self.nlp_btn, "Build NLP Neural Network")
-
-        # Association Rules  Tab Buttons
-        #==========================================================================================
-        #S = ttk.Label(self.tab2, text= "External Modules Installation", background="white",font = "Times", anchor='nw').grid(row=0,column=0)
-        self.apriori_pic = PhotoImage(file = "icons/p_appriori.png")
-        self.apriori_btn   = ttk.Button(self.tab2,image=self.apriori_pic, text='S', command = self.show_app)
-        self.apriori_btn.grid(row = 1, column = 0)
-        self.apriori_tip = tlm.createToolTip(self.apriori_btn, 'Build an Association Rule Learning Model')
-
-
-        self.eclat_pic = PhotoImage(file = "icons/p_eclat.png")
-        self.eclat_btn = ttk.Button(self.tab2, image = self.eclat_pic,text='S', command = self.show_app)
-        self.eclat_btn.grid(row = 1, column = 1)
-        self.eclat_tip = tlm.createToolTip(self.eclat_btn, '!eclat')
-
-        self.fp_pic = PhotoImage(file = "icons/p_fp.png")
-        self.fp_btn = ttk.Button(self.tab2,image = self.fp_pic, text ='S', command = self.show_app)
-        self.fp_btn.grid(row = 2, column = 0)
-        self.fp_tip = tlm.createToolTip(self.fp_btn, '!fp')
-        
 
         # Vizualize Tab Buttons
         #==========================================================================================
@@ -443,33 +405,68 @@ class DataDoc:
         self.bar_pic  = PhotoImage(file = "icons/p_bar.png")
 
         #Histogram
-        self.hist_btn   = ttk.Button(self.tab5, text = 'S', image = self.hist_pic, command = self.hist_graph)
+        self.hist_btn   = ttk.Button(self.graphs_tab, text = 'S', image = self.hist_pic, command = self.hist_graph)
         self.hist_btn.grid(row = 1, column = 0)
         self.hist_tip = tlm.createToolTip(self.hist_btn, "Show dataset's histogram and statistics of selected characteristics, such as standard deviation, mean, median, etc.")
 
-
         #Boxplot
-        self.box_btn = ttk.Button(self.tab5, text='S', image = self.box_pic, command = self.box_graph)
+        self.box_btn = ttk.Button(self.graphs_tab, text='S', image = self.box_pic, command = self.box_graph)
         self.box_btn.grid(row = 1, column = 1)
         self.box_tip = tlm.createToolTip(self.box_btn, "Show dataset's box plot and statistics of selected characteristics, such as standard deviation, mean, median, etc.")
 
         #Piechart 
-        self.pie_btn = ttk.Button(self.tab5, text='S', image = self.pie_pic, command = self.pie_chart)
+        self.pie_btn = ttk.Button(self.graphs_tab, text='S', image = self.pie_pic, command = self.pie_chart)
         self.pie_btn.grid(row = 1, column = 2)
         self.pie_tip = tlm.createToolTip(self.pie_btn, "Show dataset's pie chart and statistics of selected characteristics, such as standard deviation, mean, median, etc.")
 
         #Scatter plot 
-        self.sc_btn  = ttk.Button(self.tab5, text='S', image=self.sc_pic, command = self.plot_data)
+        self.sc_btn  = ttk.Button(self.graphs_tab, text='S', image=self.sc_pic, command = self.plot_data)
         self.sc_btn.grid(row = 2,column = 0)
         self.sc_btn_tip  = tlm.createToolTip(self.sc_btn, "Show dataset's scater plot illustation.\nIf dataset dimensions is over 3 then the tool automatically will apply PCA to dataset with aim to create a 3d scatter plot.")
 
         #Line plot
-        self.line_btn = ttk.Button(self.tab5, text='S', image = self.line_pic, command = self.line_graph)
+        self.line_btn = ttk.Button(self.graphs_tab, text='S', image = self.line_pic, command = self.line_graph)
         self.line_btn.grid(row = 2, column = 1)
         self.line_tip = tlm.createToolTip(self.line_btn, "Show dataset's lineplot and statistics of selected characteristics, such as standard deviation, mean, median, etc.")
         
+        
+        # Neural Nets Tab Buttons
+        #==========================================================================================        
+        self.NLP_ico = PhotoImage(file = "icons/p_NN.png")
+        self.CNN_ico = PhotoImage(file = "icons/p_NN1.png")
+        self.MLP_ico = PhotoImage(file = "icons/p_NN2.png")
 
-        S = ttk.Label(self.tab3, text = "Image Processing", background = "white", font = "Times").grid(row = 0, column = 0)
+        self.nn_btn   = ttk.Button(self.Neural_nets_tab, text = 'S', image = self.MLP_ico, command = self.show_app)
+        self.nn_btn.grid(row = 1,column = 0)
+        self.nn_tip = tlm.createToolTip(self.nn_btn, "Build Neural Net")
+
+        self.cnn_btn   = ttk.Button(self.Neural_nets_tab, text = 'S', image = self.CNN_ico, command = self.show_app)
+        self.cnn_btn.grid(row = 1,column = 1)
+        self.cnn_tip = tlm.createToolTip(self.cnn_btn, "Build a Convolutional Neural Network")
+        
+        self.nlp_btn   = ttk.Button(self.Neural_nets_tab, text = 'S', image = self.NLP_ico, command = self.show_app)
+        self.nlp_btn.grid(row=2,column=0)
+        self.nlp_tip = tlm.createToolTip(self.nlp_btn, "Build NLP Neural Network")
+
+
+        # Association Rules  Tab Buttons
+        #==========================================================================================
+        self.apriori_pic = PhotoImage(file = "icons/p_appriori.png")
+        self.apriori_btn   = ttk.Button(self.association_rules_tab,image=self.apriori_pic, text='S', command = self.show_app)
+        self.apriori_btn.grid(row = 1, column = 0)
+        self.apriori_tip = tlm.createToolTip(self.apriori_btn, 'Build an Association Rule Learning Model')
+
+
+        self.eclat_pic = PhotoImage(file = "icons/p_eclat.png")
+        self.eclat_btn = ttk.Button(self.association_rules_tab, image = self.eclat_pic,text='S', command = self.show_app)
+        self.eclat_btn.grid(row = 1, column = 1)
+        self.eclat_tip = tlm.createToolTip(self.eclat_btn, '!eclat')
+
+        self.fp_pic = PhotoImage(file = "icons/p_fp.png")
+        self.fp_btn = ttk.Button(self.association_rules_tab,image = self.fp_pic, text ='S', command = self.show_app)
+        self.fp_btn.grid(row = 2, column = 0)
+        self.fp_tip = tlm.createToolTip(self.fp_btn, '!fp')
+        
 
         text = Text(self.tab6)
         text.grid(row = 0, column = 0)
@@ -482,7 +479,7 @@ class DataDoc:
 
 
 
-        # create keysortcuts
+        # Create Kcleeysortcuts
         self.app.bind('<i>', self.import_dataset)
         self.app.bind('<k>', self.kprica)
         self.app.bind('<p>', self.prica)
