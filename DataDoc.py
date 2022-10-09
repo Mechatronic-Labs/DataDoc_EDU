@@ -2,8 +2,8 @@
 # DataDoc application 
 #
 __author__      = "Apostolos Tapsas", "Apostolos Valiakos"
-__copyright__   = "Copyright 2019, Apostolos Tapsas", "Apostolos Valiakos"
-__license__     = "Heartbit"
+__copyright__   = "Copyright 2022, Apostolos Tapsas", "Apostolos Valiakos"
+__license__     = "Mechatronic Labs Team"
 __version__     = "1.0.6"
 __email__       = "Apostolos Tapsas", "Apostolos Valiakos"
 __status__      = "Production/Under Development"
@@ -420,18 +420,18 @@ class DataDoc:
         self.apriori_pic = PhotoImage(file = "icons/p_appriori.png")
         self.apriori_btn   = ttk.Button(self.tab2,image=self.apriori_pic, text='S', command = self.show_app)
         self.apriori_btn.grid(row = 1, column = 0)
-        self.apriori_tip = tlm.createToolTip(self.apriori_btn, 'a priori')
+        self.apriori_tip = tlm.createToolTip(self.apriori_btn, 'Build an Association Rule Learning Model')
 
 
         self.eclat_pic = PhotoImage(file = "icons/p_eclat.png")
         self.eclat_btn = ttk.Button(self.tab2, image = self.eclat_pic,text='S', command = self.show_app)
         self.eclat_btn.grid(row = 1, column = 1)
-        self.eclat_tip = tlm.createToolTip(self.eclat_btn, 'eclat')
+        self.eclat_tip = tlm.createToolTip(self.eclat_btn, '!eclat')
 
         self.fp_pic = PhotoImage(file = "icons/p_fp.png")
         self.fp_btn = ttk.Button(self.tab2,image = self.fp_pic, text ='S', command = self.show_app)
         self.fp_btn.grid(row = 2, column = 0)
-        self.fp_tip = tlm.createToolTip(self.fp_btn, 'fp')
+        self.fp_tip = tlm.createToolTip(self.fp_btn, '!fp')
         
 
         # Vizualize Tab Buttons
