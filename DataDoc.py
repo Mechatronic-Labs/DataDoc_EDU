@@ -138,13 +138,12 @@ class DataDoc:
         self.note.add(self.graphs_tab,            text = "View",   image = self.ter_image)
         self.note.add(self.Neural_nets_tab,       text = "Neural", image = self.nntab_image)
         self.note.add(self.association_rules_tab, text = "Rules" , image = self.ass_image)
-        #self.note.add(self.tab3, text = "I", image = self.image_pros_image)
-        #self.note.add(self.tab6, text = "About DataDoc", image = self.info_image)
+
         self.note.pack(fill=BOTH, expand=True, side='right')
 
         # Pack buttons to the left side
-        self.bug  = ttk.Button(self.note,text='Doc', image = self.bug_image, command = self.repbug)
-        self.bug.pack(side=BOTTOM, anchor=W) 
+        self.bug_btn  = ttk.Button(self.note,text='Doc', image = self.bug_image, command = self.repbug)
+        self.bug_btn.pack(side=BOTTOM, anchor=W) 
 
         #Create  Menu
         self.menu = Menu(self.app)
@@ -188,16 +187,16 @@ class DataDoc:
         # Analyze
         #========================================================================================
         # Define images for Analyze menu
-        self.ds        = PhotoImage(file = "icons/p_da.png")
-        self.normality = PhotoImage(file = "icons/p_nor_test.png")
-        self.f_test    = PhotoImage(file = "icons/p_f_test.png")
-        self.chi_test  = PhotoImage(file = "icons/p_chisquare.png")
+        self.ds             = PhotoImage(file = "icons/p_da.png")
+        self.normality_test = PhotoImage(file = "icons/p_nor_test.png")
+        self.f_test         = PhotoImage(file = "icons/p_f_test.png")
+        self.chi_test        = PhotoImage(file = "icons/p_chisquare.png")
 
 
         self.filemenu = Menu(self.menu)
         self.menu.add_cascade(label="Analyze", menu=self.submenu2)
         self.submenu2.add_cascade(label="Descriptive Statistics",image=self.ds, menu = self.filemenu)
-        self.filemenu.add_command(label="Normality Test", image=self.normality, command = self.norm_test)
+        self.filemenu.add_command(label="Normality Test", image=self.normality_test, command = self.norm_test)
         self.filemenu.add_command(label="F Test", image=self.f_test, command = self.ftest)
         self.filemenu = Menu(self.menu)
         
@@ -206,29 +205,29 @@ class DataDoc:
         #========================================================================================
         #Define images for Compare Means menu
         self.cm  = PhotoImage(file = "icons/p_cm.png")
-        self.tt1 = PhotoImage(file = "icons/p_i_t_t.png")
-        self.tt2 = PhotoImage(file = "icons/p_p_t_t.png")
-        self.tt3 = PhotoImage(file = "icons/p_i_t_z.png")
+        self.indepen_ttest_img = PhotoImage(file = "icons/p_i_t_t.png")
+        self.indepen_ztest_img = PhotoImage(file = "icons/p_i_t_z.png")
+        self.paired_ttest_img  = PhotoImage(file = "icons/p_p_t_t.png")
 
 
         self.submenu2.add_cascade(label="Compare Means",image = self.cm ,menu = self.filemenu)
-        self.filemenu.add_command(label="Independent Sample t-test", image = self.tt1, command=self.in_t_test)
-        self.filemenu.add_command(label="Independent Sample z-test", image = self.tt3, command=self.in_z_test)
-        self.filemenu.add_command(label="Paired Sample t-test", image = self.tt2, command=self.p_t_test)
+        self.filemenu.add_command(label="Independent Sample t-test", image = self.indepen_ttest_img, command=self.in_t_test)
+        self.filemenu.add_command(label="Independent Sample z-test", image = self.indepen_ztest_img, command=self.in_z_test)
+        self.filemenu.add_command(label="Paired Sample t-test", image = self.paired_ttest_img, command=self.p_t_test)
         self.filemenu = Menu(self.menu)
 
         #Non parametric Tests
         #========================================================================================
         #Define images for Non parametric Tests
         self.nparam     = PhotoImage(file = "icons/dstats.png")
-        self.paired_wl  = PhotoImage(file = "icons/p_wil.png")
-        self.indepe_wl  = PhotoImage(file = "icons/p_inwil.png")
+        self.paired_wl_img  = PhotoImage(file = "icons/p_wil.png")
+        self.indepe_wl_img  = PhotoImage(file = "icons/p_inwil.png")
 
 
         self.submenu2.add_cascade(label="Non Parametric Tests", image = self.nparam, menu = self.filemenu)
         self.filemenu.add_command(label="Chisquare Test", image = self.chi_test, command = self.chi)
-        self.filemenu.add_command(label="Paired Sample Wilcoxon test", image = self.paired_wl, command = self.Wilcox)
-        self.filemenu.add_command(label="Independent Sample Mann_Whitney_Wilcoxon", image = self.indepe_wl, command = self.Mann_Whitney_Wilcoxon)
+        self.filemenu.add_command(label="Paired Sample Wilcoxon test", image = self.paired_wl_img, command = self.Wilcox)
+        self.filemenu.add_command(label="Independent Sample Mann_Whitney_Wilcoxon", image = self.indepe_wl_img, command = self.Mann_Whitney_Wilcoxon)
         self.filemenu = Menu(self.menu)
 
 
@@ -246,30 +245,33 @@ class DataDoc:
 
         # First menu of Preprocces tab
         self.regression_menu.add_cascade(label = "Linear Models", image = self.reg, menu = self.linear_menu)
-        self.lr= PhotoImage(file = "icons/p_linear_reg.png")
-        self.mr= PhotoImage(file = "icons/p_mul_reg.png")
+        self.linear_reg_img = PhotoImage(file = "icons/p_linear_reg.png")
+        self.mult_reg_img   = PhotoImage(file = "icons/p_mul_reg.png")
 
         # Sub menus of First menu of Preprocces tab
-        self.linear_menu.add_command(label="Simple Linear Regression", image = self.lr, command = self.slr)
-        self.linear_menu.add_command(label="Multivariate Regression",  image = self.mr, command = self.mlr)
-        self.svm_reg = PhotoImage(file = "icons/p_svm_rec.png")
-        self.svm_mod = PhotoImage(file = "icons/p_svm_mod.png")
+        self.linear_menu.add_command(label="Simple Linear Regression", image = self.linear_reg_img, command = self.slr)
+        self.linear_menu.add_command(label="Multivariate Regression",  image = self.mult_reg_img, command = self.mlr)
+        
+        self.svm_mod_img = PhotoImage(file = "icons/p_svm_mod.png")
 
         # Second menu of Preprocces tab
-        self.regression_menu.add_cascade(label="Support Vector Model", image = self.svm_mod, menu = self.svm_menu)
+        self.regression_menu.add_cascade(label="Support Vector Model", image = self.svm_mod_img, menu = self.svm_menu)
+
+        self.svm_reg_img = PhotoImage(file = "icons/p_svm_rec.png")
 
         # Sub menus of Second menu of Preprocces tab
-        self.svm_menu.add_command(label="Support Vector Regression", image = self.svm_reg, command = self.svr)
-        self.d_tree_mod = PhotoImage(file = "icons/p_dtree_mod.png")
-        self.d_tree_reg = PhotoImage(file = "icons/p_dtree_reg.png")
-        self.rand_for   = PhotoImage(file = "icons/p_rf.png")
+        self.svm_menu.add_command(label="Support Vector Regression", image = self.svm_reg_img, command = self.svr)
+        self.d_tree_mod_img = PhotoImage(file = "icons/p_dtree_mod.png")
 
         # 3rd menu of Preprocces tab
-        self.regression_menu.add_cascade(label="Decision tree models", image = self.d_tree_mod, menu = self.dt_menu)
+        self.regression_menu.add_cascade(label="Decision tree models", image = self.d_tree_mod_img, menu = self.dt_menu)
 
+        self.d_tree_reg_img = PhotoImage(file = "icons/p_dtree_reg.png")
+        self.rand_forr_img  = PhotoImage(file = "icons/p_rf.png")
+        
         # Sub menus of 3rd menu of Preprocces tab
-        self.dt_menu.add_command(label="Decision Tree Regression", image = self.d_tree_reg, command = self.dt_r)
-        self.dt_menu.add_command(label="Random Forest Regression", image = self.rand_for, command = self.rf_r)
+        self.dt_menu.add_command(label="Decision Tree Regression", image = self.d_tree_reg_img, command = self.dt_r)
+        self.dt_menu.add_command(label="Random Forest Regression", image = self.rand_forr_img, command = self.rf_r)
 
 
         # Classification Menu
@@ -286,50 +288,51 @@ class DataDoc:
 
         # First menu of Preprocces tab
         self.classification_menu.add_cascade(label = "Linear Models", image = self.reg, menu = self.c_linear_menu)
-        self.log_reg = PhotoImage(file = "icons/p_logistic_reg.png")
+        
+        self.log_reg_img = PhotoImage(file = "icons/p_logistic_reg.png")
 
         # Sub menus of First menu of Preprocces tab
-        self.c_linear_menu.add_command(label = "Logistic Regression", image = self.log_reg, command = self.logreg)
+        self.c_linear_menu.add_command(label = "Logistic Regression", image = self.log_reg_img, command = self.logreg)
 
-        self.svm                 = PhotoImage(file = "icons/p_svm.png")
-        self.svm_class           = PhotoImage(file = "icons/p_svm_class.png")
-        self.rand_for_c          = PhotoImage(file = "icons/p_rf_c.png")
-        self.d_tree_c            = PhotoImage(file = "icons/p_dtree_c.png")
-        self.naive               = PhotoImage(file = "icons/p_nb.png")
-        self.bayes_c             = PhotoImage(file = "icons/p_nb_c.png")
-        self.knn_c               = PhotoImage(file = "icons/p_knn.png")
-        self.vector_quantization = PhotoImage(file = "icons/p_v.png")
+        self.svm_img                  = PhotoImage(file = "icons/p_svm.png")
+        self.svm_class_img            = PhotoImage(file = "icons/p_svm_class.png")
+        self.rand_for_c_img           = PhotoImage(file = "icons/p_rf_c.png")
+        self.d_tree_c_img             = PhotoImage(file = "icons/p_dtree_c.png")
+        self.naive_b_img              = PhotoImage(file = "icons/p_nb.png")
+        self.bayes_c_img              = PhotoImage(file = "icons/p_nb_c.png")
+        self.knn_c_img                = PhotoImage(file = "icons/p_knn.png")
+        self.vector_quantization_img  = PhotoImage(file = "icons/p_v.png")
 
-        self.classification_menu.add_cascade(label = "Vector Quantization", image= self.vector_quantization, menu = self.knn_menu)
+        self.classification_menu.add_cascade(label = "Vector Quantization", image= self.vector_quantization_img, menu = self.knn_menu)
 
         # Sub menus of Second menu of Preprocces tab
-        self.knn_menu.add_command(label = "KNN", image=self.knn_c ,command=self.knn)
+        self.knn_menu.add_command(label = "KNN", image=self.knn_c_img ,command=self.knn)
         
         # Second menu of Preprocces tab
-        self.classification_menu.add_cascade(label = "Support Vector Model", image = self.svm, menu = self.c_svm_menu)
+        self.classification_menu.add_cascade(label = "Support Vector Model", image = self.svm_img, menu = self.c_svm_menu)
 
 
         # Sub menus of Second menu of Preprocces tab
-        self.c_svm_menu.add_command(label = "Support Vector Classifier", image = self.svm_class, command = self.svc)
+        self.c_svm_menu.add_command(label = "Support Vector Classifier", image = self.svm_class_img, command = self.svc)
 
 
         # 3rd menu of Preprocces tab
-        self.classification_menu.add_cascade(label = "Decision tree models", image = self.d_tree_mod, menu = self.c_dt_menu)
+        self.classification_menu.add_cascade(label = "Decision tree models", image = self.d_tree_mod_img, menu = self.c_dt_menu)
 
 
         # Sub menus of 3rd menu of Preprocces tab
-        self.c_dt_menu.add_command(label = "Decision Tree Classifier", image = self.d_tree_c, command = self.dt_c)
-        self.c_dt_menu.add_command(label = "Random Forest Classifier", image = self.rand_for_c, command = self.rf_c)
+        self.c_dt_menu.add_command(label = "Decision Tree Classifier", image = self.d_tree_c_img, command = self.dt_c)
+        self.c_dt_menu.add_command(label = "Random Forest Classifier", image = self.rand_for_c_img, command = self.rf_c)
 
         # Bayes Menu
-        self.classification_menu.add_cascade(label = "Bayes Model",image = self.bayes_c, menu = self.bayes)
-        self.bayes.add_command(label = "Naive Bayes",              image = self.naive,   command = self.nb)
+        self.classification_menu.add_cascade(label = "Bayes Model",image = self.bayes_c_img, menu = self.bayes)
+        self.bayes.add_command(label = "Naive Bayes",              image = self.naive_b_img, command = self.nb)
 
 
         # Clusstering Menu
         #==========================================================================================
-        self.kmeans_image   = PhotoImage(file = "icons/p_kmeans.png")
-        self.hierart_image  = PhotoImage(file = "icons/p_hp.png")
+        self.kmeans_img   = PhotoImage(file = "icons/p_kmeans.png")
+        self.hierart_img  = PhotoImage(file = "icons/p_hp.png")
 
         self.clustering_menu = Menu(self.menu)
         self.kmeans_menu     = Menu(self.menu)
@@ -338,11 +341,11 @@ class DataDoc:
         self.menu.add_cascade(label = "Clustering", menu = self.clustering_menu)
 
         # First menu of Preprocces tab
-        self.clustering_menu.add_cascade(label = "Vector Quantization",image = self.vector_quantization, menu = self.kmeans_menu)
+        self.clustering_menu.add_cascade(label = "Vector Quantization",image = self.vector_quantization_img, menu = self.kmeans_menu)
 
         # Sub menus of 3rd menu of Preprocces tab
-        self.kmeans_menu.add_command(label = "Hierarchical clustering", image = self.hierart_image, command = self.hc)
-        self.kmeans_menu.add_command(label = "K-Means",                 image = self.kmeans_image,  command = self.km)
+        self.kmeans_menu.add_command(label = "Hierarchical clustering", image = self.hierart_img, command = self.hc)
+        self.kmeans_menu.add_command(label = "K-Means",                 image = self.kmeans_img,  command = self.km)
         
 
         # Settings Menu
@@ -353,9 +356,9 @@ class DataDoc:
        
         # Themes Menu
         #==========================================================================================
-        self.themes_menu = Menu(self.menu)
-        self.settings_menu.add_cascade(label = "Themes", menu = self.themes_menu)
-        self.themes_menu.add_command  (label = "Basic",  command = '')
+        ##self.themes_menu = Menu(self.menu)
+        ##self.settings_menu.add_cascade(label = "Themes", menu = self.themes_menu)
+        ##self.themes_menu.add_command  (label = "Basic",  command = '')
     
        
         # Help Menu
@@ -364,8 +367,8 @@ class DataDoc:
         self.info_menu  = Menu(self.menu)
         
         self.menu.add_cascade(label = 'Help', menu = self.about_menu)
-        self.about_menu.add_command(label = 'Keyboard Shortcuts List',   command = self.key_list)
-        self.about_menu.add_cascade(label = 'Info',                      menu = self.info_menu)
+        self.about_menu.add_command(label = 'Keyboard Shortcuts List',  command = self.key_list)
+        self.about_menu.add_cascade(label = 'Info',                     menu = self.info_menu)
         self.info_menu.add_command (label = 'Dummy Variables Handling', command = self.dummy_values_handling_info)
         self.info_menu.add_command (label = 'Missing Values Handling',  command = self.missing_values_handling_info)
         self.info_menu.add_command (label = 'About Datadoc',            command = self.abt)
@@ -373,23 +376,23 @@ class DataDoc:
 
         # Import and Stats for Dataset Tab Buttons
         #==========================================================================================
-        self.imdb = PhotoImage(file = "icons/imdb.png")
-        self.scp  = PhotoImage(file = "icons/scaplot.png")
-        self.abt  = PhotoImage(file = "icons/sti2.png")
-        self.shd  = PhotoImage(file = "icons/p_ds.png")
-        self.vie  = PhotoImage(file = "icons/p_view.png")        
+        self.import_data_img = PhotoImage(file = "icons/imdb.png")
+        ##self.scp  = PhotoImage(file = "icons/scaplot.png")
+        ##self.abt  = PhotoImage(file = "icons/sti2.png")
+        self.data_stats_img  = PhotoImage(file = "icons/p_ds.png")
+        self.data_view_img  = PhotoImage(file = "icons/p_view.png")        
         
         # To work with createToolTip class you should create the buttons as below
-        self.import_data_button1 = ttk.Button(self.data_tab, text = 'S', image = self.imdb, command = self.import_dataset)
+        self.import_data_button1 = ttk.Button(self.data_tab, text = 'Import Dataset', image = self.import_data_img, command = self.import_dataset)
         self.import_data_button1.grid(row = 1, column = 0)
         self.sk_tip = tlm.createToolTip(self.import_data_button1, 'Import a dataset from .xlsx or .xls files.')
 
-        self.import_data_button2 = ttk.Button(self.data_tab, text = 'S', image = self.shd , command = self.data_stats)
+        self.import_data_button2 = ttk.Button(self.data_tab, text = 'Show Dataset', image = self.data_stats_img, command = self.data_stats)
         self.import_data_button2.grid(row = 1, column = 1)
-        self.sk_tip = tlm.createToolTip(self.import_data_button2, 'Show Data Statistics')
+        self.sk_tip = tlm.createToolTip(self.import_data_button2, 'Dataset Statistics')
 
 
-        self.import_data_button3 = ttk.Button(self.data_tab, text = 'S', image = self.vie, command = self.view)
+        self.import_data_button3 = ttk.Button(self.data_tab, text = 'View Dataset', image = self.data_view_img, command = self.view)
         self.import_data_button3.grid(row = 1, column = 2)
         self.skl2 = tlm.createToolTip(self.import_data_button3, "View dataset.")
 
@@ -397,74 +400,74 @@ class DataDoc:
         # Vizualize Tab Buttons
         #==========================================================================================
         #Create Button images
-        self.hist_pic = PhotoImage(file = "icons/p_hist.png")
-        self.box_pic  = PhotoImage(file = "icons/p_box_btn.png")
-        self.pie_pic  = PhotoImage(file = "icons/p_pie.png")
-        self.sc_pic   = PhotoImage(file = "icons/scaplot.png")
-        self.line_pic = PhotoImage(file = "icons/p_line_graph.png")
-        self.bar_pic  = PhotoImage(file = "icons/p_bar.png")
+        self.hist_img = PhotoImage(file = "icons/p_hist.png")
+        self.box_img  = PhotoImage(file = "icons/p_box_btn.png")
+        self.pie_img  = PhotoImage(file = "icons/p_pie.png")
+        self.sc_img   = PhotoImage(file = "icons/scaplot.png")
+        self.line_img = PhotoImage(file = "icons/p_line_graph.png")
+        self.bar_img  = PhotoImage(file = "icons/p_bar.png")
 
         #Histogram
-        self.hist_btn   = ttk.Button(self.graphs_tab, text = 'S', image = self.hist_pic, command = self.hist_graph)
+        self.hist_btn   = ttk.Button(self.graphs_tab, text = 'S', image = self.hist_img, command = self.hist_graph)
         self.hist_btn.grid(row = 1, column = 0)
         self.hist_tip = tlm.createToolTip(self.hist_btn, "Show dataset's histogram and statistics of selected characteristics, such as standard deviation, mean, median, etc.")
 
         #Boxplot
-        self.box_btn = ttk.Button(self.graphs_tab, text='S', image = self.box_pic, command = self.box_graph)
+        self.box_btn = ttk.Button(self.graphs_tab, text='S', image = self.box_img, command = self.box_graph)
         self.box_btn.grid(row = 1, column = 1)
         self.box_tip = tlm.createToolTip(self.box_btn, "Show dataset's box plot and statistics of selected characteristics, such as standard deviation, mean, median, etc.")
 
         #Piechart 
-        self.pie_btn = ttk.Button(self.graphs_tab, text='S', image = self.pie_pic, command = self.pie_chart)
+        self.pie_btn = ttk.Button(self.graphs_tab, text='S', image = self.pie_img, command = self.pie_chart)
         self.pie_btn.grid(row = 1, column = 2)
         self.pie_tip = tlm.createToolTip(self.pie_btn, "Show dataset's pie chart and statistics of selected characteristics, such as standard deviation, mean, median, etc.")
 
         #Scatter plot 
-        self.sc_btn  = ttk.Button(self.graphs_tab, text='S', image=self.sc_pic, command = self.plot_data)
+        self.sc_btn  = ttk.Button(self.graphs_tab, text='S', image=self.sc_img, command = self.plot_data)
         self.sc_btn.grid(row = 2,column = 0)
         self.sc_btn_tip  = tlm.createToolTip(self.sc_btn, "Show dataset's scater plot illustation.\nIf dataset dimensions is over 3 then the tool automatically will apply PCA to dataset with aim to create a 3d scatter plot.")
 
         #Line plot
-        self.line_btn = ttk.Button(self.graphs_tab, text='S', image = self.line_pic, command = self.line_graph)
+        self.line_btn = ttk.Button(self.graphs_tab, text='S', image = self.line_img, command = self.line_graph)
         self.line_btn.grid(row = 2, column = 1)
         self.line_tip = tlm.createToolTip(self.line_btn, "Show dataset's lineplot and statistics of selected characteristics, such as standard deviation, mean, median, etc.")
         
         
         # Neural Nets Tab Buttons
         #==========================================================================================        
-        self.NLP_ico = PhotoImage(file = "icons/p_NN.png")
-        self.CNN_ico = PhotoImage(file = "icons/p_NN1.png")
-        self.MLP_ico = PhotoImage(file = "icons/p_NN2.png")
+        self.NLP_img = PhotoImage(file = "icons/p_NN.png")
+        self.CNN_img = PhotoImage(file = "icons/p_NN1.png")
+        self.MLP_img = PhotoImage(file = "icons/p_NN2.png")
 
-        self.nn_btn   = ttk.Button(self.Neural_nets_tab, text = 'S', image = self.MLP_ico, command = self.show_app)
+        self.nn_btn   = ttk.Button(self.Neural_nets_tab, text = 'Build NN', image = self.MLP_img, command = self.show_app)
         self.nn_btn.grid(row = 1,column = 0)
         self.nn_tip = tlm.createToolTip(self.nn_btn, "Build Neural Net")
 
-        self.cnn_btn   = ttk.Button(self.Neural_nets_tab, text = 'S', image = self.CNN_ico, command = self.show_app)
+        self.cnn_btn   = ttk.Button(self.Neural_nets_tab, text = 'Build CNN', image = self.CNN_img, command = self.show_app)
         self.cnn_btn.grid(row = 1,column = 1)
         self.cnn_tip = tlm.createToolTip(self.cnn_btn, "Build a Convolutional Neural Network")
         
-        self.nlp_btn   = ttk.Button(self.Neural_nets_tab, text = 'S', image = self.NLP_ico, command = self.show_app)
-        self.nlp_btn.grid(row=2,column=0)
+        self.nlp_btn   = ttk.Button(self.Neural_nets_tab, text = 'Build NLP', image = self.NLP_img, command = self.show_app)
+        self.nlp_btn.grid(row = 1,column = 2)
         self.nlp_tip = tlm.createToolTip(self.nlp_btn, "Build NLP Neural Network")
 
 
         # Association Rules  Tab Buttons
         #==========================================================================================
-        self.apriori_pic = PhotoImage(file = "icons/p_appriori.png")
-        self.apriori_btn   = ttk.Button(self.association_rules_tab,image=self.apriori_pic, text='S', command = self.show_app)
+        self.apriori_img = PhotoImage(file = "icons/p_appriori.png")
+        self.apriori_btn   = ttk.Button(self.association_rules_tab,image=self.apriori_img, text='Apriori', command = self.show_app)
         self.apriori_btn.grid(row = 1, column = 0)
         self.apriori_tip = tlm.createToolTip(self.apriori_btn, 'Build an Association Rule Learning Model')
 
 
-        self.eclat_pic = PhotoImage(file = "icons/p_eclat.png")
-        self.eclat_btn = ttk.Button(self.association_rules_tab, image = self.eclat_pic,text='S', command = self.show_app)
+        self.eclat_img = PhotoImage(file = "icons/p_eclat.png")
+        self.eclat_btn = ttk.Button(self.association_rules_tab, image = self.eclat_img, text='Eclat', command = self.show_app)
         self.eclat_btn.grid(row = 1, column = 1)
         self.eclat_tip = tlm.createToolTip(self.eclat_btn, '!eclat')
 
-        self.fp_pic = PhotoImage(file = "icons/p_fp.png")
-        self.fp_btn = ttk.Button(self.association_rules_tab,image = self.fp_pic, text ='S', command = self.show_app)
-        self.fp_btn.grid(row = 2, column = 0)
+        self.fp_img = PhotoImage(file = "icons/p_fp.png")
+        self.fp_btn = ttk.Button(self.association_rules_tab,image = self.fp_img, text ='Fp', command = self.show_app)
+        self.fp_btn.grid(row = 1, column = 2)
         self.fp_tip = tlm.createToolTip(self.fp_btn, '!fp')
         
 
@@ -741,7 +744,7 @@ class DataDoc:
 
          else:
              HS.Histogram(self.Dataset)
-             
+
     #PCA
     def prica(self,event=None):
         if len(self.Dataset)==0:
