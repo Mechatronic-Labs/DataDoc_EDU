@@ -142,7 +142,6 @@ class K_Means:
 
 
     def elb(self):
-        print("Debug Message: el called")
         self.ax.clear()
         wcss = []
         val=0

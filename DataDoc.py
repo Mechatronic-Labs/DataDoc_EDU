@@ -77,7 +77,6 @@ from Data_Mining_Models import Naive_Bayes as NBY
 
 from General import about
 from General import key_list
-
 from General import splash 
 
 
