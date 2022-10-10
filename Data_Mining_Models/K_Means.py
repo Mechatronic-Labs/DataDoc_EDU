@@ -165,6 +165,8 @@ class K_Means:
         self.canvas.draw()
 
     def cl(self):
+        self.close.state(["!disabled"])
+        self.plot_btn.state(["!disabled"])
         self.pred.state(["!disabled"])
         self.master.destroy()
     
