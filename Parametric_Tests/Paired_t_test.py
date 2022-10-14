@@ -16,9 +16,13 @@ from math import sqrt
 class t_test:
     def __init__(self,df):
         self.df = df
+        self.master_isdestroed = 0
+
+        if len(self.df) > 50:
+            tkMessageBox.showinfo("Importand info", "The Dataset is too big according to the central limit theorem proposed to apply z-test instead")
+        
         self.d = df.to_numpy()
         self.names = list(df.columns.values)
-        self.master_isdestroed = 0
         
         # Define Main Window and set Title
         self.root = Tk()
