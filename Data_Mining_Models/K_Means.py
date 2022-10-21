@@ -161,7 +161,7 @@ class K_Means:
         self.ax.plot(wcss, label = 'WCSS Line')
         self.ax.title.set_text("The Elbow Method")
         self.ax.set_xlabel("Number of Clusters")
-        self.ax.set_ylabel("WCSS")
+        self.ax.set_ylabel("Sum Of Square Erro - WCSS")
         self.canvas.draw()
 
     def cl(self):
