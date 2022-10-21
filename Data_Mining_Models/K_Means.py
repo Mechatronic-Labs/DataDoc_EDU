@@ -19,7 +19,7 @@ class K_Means:
         self.df = df
         self.d =  df
         self.names = list(df.columns.values)
-        self.dim = 0
+        self.elbow = 0
        
         self.root = Tk()
         self.root.geometry("800x500")
@@ -113,6 +113,7 @@ class K_Means:
         mainloop()
         
     def vizu(self):
+        self.elbow = 0
         self.close.state(["!disabled"])
         self.plot_btn.state(["!disabled"])
 
@@ -142,6 +143,7 @@ class K_Means:
 
 
     def elb(self):
+        self.elbow = 1
         self.ax.clear()
         wcss = []
         val=0
@@ -167,7 +169,8 @@ class K_Means:
     def cl(self):
         self.close.state(["!disabled"])
         self.plot_btn.state(["!disabled"])
-        self.pred.state(["!disabled"])
+        if self.elbow == 0:
+            self.pred.state(["!disabled"])
         self.master.destroy()
     
     def st(self):
