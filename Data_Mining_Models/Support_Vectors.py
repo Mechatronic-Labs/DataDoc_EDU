@@ -268,8 +268,8 @@ class Support_Vectors:
         ttk.Button(self.master,text='Quit', command = self.master_destroed).grid(row = 4, column = 1, sticky = W, pady = 4, ipady = 2, ipadx = 4)
         
 
-        self.root.bind('<Escape>', lambda e: self.close_program)
-        self.root.protocol("WM_DELETE_WINDOW", self.close_program)
+        self.root.bind('<Escape>', lambda e: self.master_destroed)
+        self.root.protocol("WM_DELETE_WINDOW", self.master_destroed)
 
         mainloop()
 
@@ -387,11 +387,6 @@ class Support_Vectors:
         self.pt.redraw()
 
         self.master_pred.mainloop()
-        
-    def cl(self):
-        self.close.state(["!disabled"])
-        self.plot_btn.state(["!disabled"])
-        self.master.destroy()
 
     def enableButtons(self):
         self.plot_btn.state(["!disabled"])
