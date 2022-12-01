@@ -59,10 +59,10 @@ class Wilcoxon_Test:
         self.show_res.state(["disabled"])
 
         # Define Close Button and put it on Buttom Frame
-        ttk.Button(bottom, text = 'Close', command = self.close_program).pack(side = LEFT)
+        ttk.Button(bottom, text = 'Close', command = self.master_destroed).pack(side = LEFT)
 
-        self.root.bind('<Escape>', lambda e: self.close_program)
-        self.root.protocol("WM_DELETE_WINDOW", self.close_program)
+        self.root.bind('<Escape>', lambda e: self.master_destroed)
+        self.root.protocol("WM_DELETE_WINDOW", self.master_destroed)
         self.root.mainloop()
     
 
