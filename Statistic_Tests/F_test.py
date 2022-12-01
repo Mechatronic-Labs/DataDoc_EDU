@@ -58,8 +58,12 @@ class f_test:
         # Define Select list on Top Frame
         self.l9 = Label(top_f,font=('times new roman',12),text='Select the characteristic for independent f-test:',background='white')
         self.l9.pack(side=LEFT)
-        w = ttk.OptionMenu(top_f, self.v, *self.names).pack(side=LEFT)
-        w = ttk.OptionMenu(top_f, self.v1, *self.names).pack(side=LEFT)
+
+        # Define First Value Choise
+        ttk.OptionMenu(top_f, self.v, *self.names).pack(side=LEFT)
+        
+        # Define Second Value Choise
+        ttk.OptionMenu(top_f, self.v1, *self.names).pack(side=LEFT)
         
         # Define Apply Button and put it on Buttom Frame
         self.bar_plt_b  =  ttk.Button(bottom, text="Apply", command=self.ftest)
@@ -172,8 +176,8 @@ class f_test:
         self.pt.show()
         self.pt.redraw()
         
-        self.master.bind('<Escape>', lambda e: self.close_program)
-        self.master.protocol("WM_DELETE_WINDOW", self.close_program)
+        self.master.bind('<Escape>', lambda e: self.master_destroed)
+        self.master.protocol("WM_DELETE_WINDOW", self.master_destroed)
         self.master.mainloop()
 
     def info(self):
