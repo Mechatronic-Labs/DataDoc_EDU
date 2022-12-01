@@ -85,8 +85,8 @@ class Analyze:
         self.pt.show()
         self.pt.redraw()
 
-        self.master.bind('<Escape>', lambda e: self.close_program)
-        self.master.protocol("WM_DELETE_WINDOW", self.close_program)
+        self.master.bind('<Escape>', lambda e: self.master_destroed)
+        self.master.protocol("WM_DELETE_WINDOW", self.master_destroed)
         self.master.mainloop()
 
     def info (self):
