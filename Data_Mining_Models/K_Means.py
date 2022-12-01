@@ -19,7 +19,7 @@ class K_Means:
         self.df = df
         self.d =  df
         self.names = list(df.columns.values)
-        self.dim = 0
+        self.elbow = 0
        
         self.root = Tk()
         self.root.geometry("800x500")
@@ -105,7 +105,7 @@ class K_Means:
         style.configure("red.Horizontal.TProgressbar", foreground = 'red', background = '#03b6fc')
         self.bar = Progressbar(self.master, length = 220, style = 'red.Horizontal.TProgressbar')
         self.bar.grid(column = 0, row = 2)   
-        self.el = ttk.Button(self.master, text = 'Elbow Method', command = self.el) 
+        self.el = ttk.Button(self.master, text = 'Elbow Method', command = self.elb) 
         self.el.grid(row = 4, column = 0, sticky = W, pady = 4, ipady = 2, ipadx = 4)
         ttk.Button(self.master, text = 'Show', command = self.vizu).grid(row = 4, column = 1, sticky = W, pady = 4, ipady = 2, ipadx = 4)
         ttk.Button(self.master, text = 'Quit', command = self.cl).grid(row = 4, column = 2, sticky = W, pady = 4, ipady = 2, ipadx = 4)
@@ -113,6 +113,7 @@ class K_Means:
         mainloop()
         
     def vizu(self):
+        self.elbow = 0
         self.close.state(["!disabled"])
         self.plot_btn.state(["!disabled"])
 
@@ -141,7 +142,8 @@ class K_Means:
         self.cl()
 
 
-    def el(self):
+    def elb(self):
+        self.elbow = 1
         self.ax.clear()
         wcss = []
         val=0
@@ -161,11 +163,14 @@ class K_Means:
         self.ax.plot(wcss, label = 'WCSS Line')
         self.ax.title.set_text("The Elbow Method")
         self.ax.set_xlabel("Number of Clusters")
-        self.ax.set_ylabel("WCSS")
+        self.ax.set_ylabel("Sum Of Square Erro - WCSS")
         self.canvas.draw()
 
     def cl(self):
-        self.pred.state(["!disabled"])
+        self.close.state(["!disabled"])
+        self.plot_btn.state(["!disabled"])
+        if self.elbow == 0:
+            self.pred.state(["!disabled"])
         self.master.destroy()
     
     def st(self):
