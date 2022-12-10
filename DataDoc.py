@@ -19,6 +19,9 @@ from tkinter.colorchooser import askcolor
 import webbrowser
 
 
+
+from Assositation_Rules import Appriori as appr
+
 from General import tkHyperlinkManager as thlm
 from General import tooltipmanager as tlm
 from General import Data_Statistics as ds
@@ -439,7 +442,7 @@ class DataDoc:
         # Association Rules  Tab Buttons
         #==========================================================================================
         self.apriori_img = PhotoImage(file = "icons/p_appriori.png")
-        self.apriori_btn   = ttk.Button(self.association_rules_tab,image=self.apriori_img, text='Apriori', command = self.show_app)
+        self.apriori_btn   = ttk.Button(self.association_rules_tab,image=self.apriori_img, text='Apriori', command = self.appri)
         self.apriori_btn.grid(row = 1, column = 0)
         self.apriori_tip = tlm.createToolTip(self.apriori_btn, 'Build an Association Rule Learning Model')
 
@@ -737,5 +740,13 @@ class DataDoc:
 
     def abt(self):
         about.About()
+    
+    # Assosiation Rules
+    def appri(self):
+        if len(self.Dataset)==0:
+            tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
+        else:
+            appr.appriori(self.Dataset)
+
 
 DataDoc()
