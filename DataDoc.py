@@ -95,6 +95,9 @@ class DataDoc:
 
         # Define Dataset
         self.Dataset=[]
+
+        # Difine Dummy Values flag
+        self.has_dummy_vals =[]
         
         # Define theme
         self.sel_theme = 'basic'
@@ -516,20 +519,24 @@ class DataDoc:
         # Load dataset 
         if len(self.Dataset)==0:
             self.Dataset = im_data.import_data().load_data()
+            # Check Missing Values 
             if self.Dataset.isnull().any().any():
                 tkMessageBox.showinfo("Important Info","Dataset Has Missing Values That Maybe Create Problems During Data Analysis. We Propose To Delete or Replace Them via Preprocess Menu. For more information about how Datadoc Handles missing values go to help>info>Missing Values Handling.")
             # Check if Dataset has Dummy Variables
             # It is not necessary to pass entire dataset
-            Dumd.Check_if_dummyd_exists(self.Dataset.head())
+            has_dum = Dumd.Check_if_dummyd_exists(self.Dataset.head())
+            self.has_dummy_vals = has_dum.has_dummy
         else:
             # Load new Dataset case 
             if tkMessageBox.askokcancel("Important Message", "Do you want to load new Dataset?"):
                 self.Dataset = im_data.import_data().load_data()
+                # Check Missing Values
                 if self.Dataset.isnull().any().any():
                     tkMessageBox.showinfo("Important Info","Dataset Has Missing Values That Maybe Create Problems During Data Analysis. We Propose To Delete or Replace Them via Preprocess Menu. For more information about how Datadoc Handles missing values go to help>info>Missing Values Handling")
                 # Check if Dataset has Dummy Variables
                 # It is not necessary to pass entire dataset
-                Dumd.Check_if_dummyd_exists(self.Dataset.head())
+                has_dum = Dumd.Check_if_dummyd_exists(self.Dataset.head())
+                self.has_dummy_vals = has_dum.has_dummy
     
     def view(self,event=None):
         if len(self.Dataset)==0:
@@ -541,7 +548,12 @@ class DataDoc:
         if len(self.Dataset)==0:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
         else:
-            ds.Data_Statistics(self.Dataset)
+            if self.has_dummy_vals:
+                # If dummy values exists disavle this button
+                # There is no reason to calculate stats for a dataset possibly contains non numeric data.
+                self.import_data_button2.state(["!disabled"])
+            else:
+                ds.Data_Statistics(self.Dataset)
 
     def plot_data(self,event=None):
         if len(self.Dataset)==0:
@@ -734,12 +746,6 @@ class DataDoc:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
          else:
              NBY.Naive_Bayes(self.Dataset)
-
-    def repbug(self):
-        brep.Bug_Report() 
-
-    def abt(self):
-        about.About()
     
     # Assosiation Rules
     def appri(self):
@@ -747,6 +753,11 @@ class DataDoc:
             tkMessageBox.showinfo("Error","Dataset matrix is empty please import dataset")
         else:
             appr.appriori(self.Dataset)
+    
+    def repbug(self):
+        brep.Bug_Report() 
 
+    def abt(self):
+        about.About()
 
 DataDoc()
