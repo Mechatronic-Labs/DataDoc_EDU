@@ -526,6 +526,9 @@ class DataDoc:
             # It is not necessary to pass entire dataset
             has_dum = Dumd.Check_if_dummyd_exists(self.Dataset.head())
             self.has_dummy_vals = has_dum.has_dummy
+            if self.has_dummy_vals:
+                self.shd  = PhotoImage(file = "icons/p_ds_dis.png")
+                self.import_data_button2.configure(image=self.shd)
         else:
             # Load new Dataset case 
             if tkMessageBox.askokcancel("Important Message", "Do you want to load new Dataset?"):
@@ -537,6 +540,12 @@ class DataDoc:
                 # It is not necessary to pass entire dataset
                 has_dum = Dumd.Check_if_dummyd_exists(self.Dataset.head())
                 self.has_dummy_vals = has_dum.has_dummy
+                if self.has_dummy_vals:
+                    self.shd  = PhotoImage(file = "icons/p_ds_dis.png")
+                    self.import_data_button2.configure(image=self.shd)
+                else:
+                    self.shd  = PhotoImage(file = "icons/p_ds.png")
+                    self.import_data_button2.configure(image=self.shd)
     
     def view(self,event=None):
         if len(self.Dataset)==0:
@@ -552,6 +561,7 @@ class DataDoc:
                 # If dummy values exists disavle this button
                 # There is no reason to calculate stats for a dataset possibly contains non numeric data.
                 self.import_data_button2.state(["!disabled"])
+                # Change Button to desabled 
             else:
                 ds.Data_Statistics(self.Dataset)
 
