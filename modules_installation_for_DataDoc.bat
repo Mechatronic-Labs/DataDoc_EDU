@@ -9,4 +9,5 @@ pip install tabulate
 pip install openpyxl
 pip install sympy
 pip install statsmodels
+pip install apyori
 PAUSE
